@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Prevents the mobile browser address bar/notch area from showing a different color -->
+  <meta name="theme-color" content="#14160a" />
   <title>SEMIX CITY ROLEPLAY</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
@@ -14,6 +16,8 @@
     html, body {
       scrollbar-width: none; /* Firefox */
       -ms-overflow-style: none; /* IE and Edge */
+      /* FIX: Forces the canvas base to be dark so elastic/bounce scrolling never reveals white */
+      background-color: #0c0d06; 
     }
     html::-webkit-scrollbar, body::-webkit-scrollbar {
       display: none; /* Chrome, Safari, Opera */
@@ -61,7 +65,8 @@
     }
   </style>
 </head>
-<body class="text-white flex flex-col items-center justify-center min-h-screen p-4 md:p-6 overflow-x-hidden relative">
+<!-- FIX: Changed min-h-screen to min-h-[100dvh] to perfectly match dynamic mobile viewports -->
+<body class="text-white flex flex-col items-center justify-center min-h-[100dvh] p-4 md:p-6 overflow-x-hidden relative">
   
   <div class="fixed inset-0 -z-10">
     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50"></div>
