@@ -6,11 +6,28 @@
   <meta name="theme-color" content="#14160a" />
   <title>SEMIX CITY ROLEPLAY</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Poppins:wght@300;400;500;600;700&display=swap');
     
+    /* Custom Scrollbar Styling for Logs */
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: rgba(234, 179, 8, 0.3);
+      border-radius: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: rgba(234, 179, 8, 0.6);
+    }
+
     html, body {
       scrollbar-width: none;
       -ms-overflow-style: none;
@@ -89,13 +106,13 @@
       </div>
 
       <nav class="flex flex-col space-y-4">
-        <a href="https://discord.gg/FeacZEXbQt" target="_blank" class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-white/5 border border-white/5 text-gray-200 hover:text-black hover:bg-yellow-400 transition-all duration-300 font-semibold group shadow-md">
+        <a id="support-link" href="https://discord.gg/FeacZEXbQt" target="_blank" class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-white/5 border border-white/5 text-gray-200 hover:text-black hover:bg-yellow-400 transition-all duration-300 font-semibold group shadow-md">
           <span class="w-2 h-2 rounded-full bg-yellow-400 group-hover:bg-black transition-colors duration-300"></span>
           <i class="fas fa-headset text-lg"></i>
           <span>CUSTOMER SUPPORT</span>
         </a>
 
-        <a href="https://discord.gg/FeacZEXbQt" target="_blank" class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-white/5 border border-white/5 text-gray-200 hover:text-black hover:bg-yellow-400 transition-all duration-300 font-semibold group shadow-md">
+        <a id="discord-link" href="https://discord.gg/FeacZEXbQt" target="_blank" class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-white/5 border border-white/5 text-gray-200 hover:text-black hover:bg-yellow-400 transition-all duration-300 font-semibold group shadow-md">
           <span class="w-2 h-2 rounded-full bg-yellow-400 group-hover:bg-black transition-colors duration-300"></span>
           <i class="fab fa-discord text-lg"></i>
           <span>DISCORD SERVER LINK</span>
@@ -109,7 +126,7 @@
       </nav>
     </div>
 
-    <header class="w-full flex justify-center py-10 z-10 animate__animated animate__fadeInDown">
+    <header class="w-full flex justify-center py-10 z-10">
       <div class="text-center select-none filter drop-shadow-[0_5px_15px_rgba(0,0,0,0.7)]">
         <div class="logo-font text-4xl md:text-5xl font-black tracking-wider flex items-center justify-center uppercase">
           <span class="text-white">S</span>
@@ -128,7 +145,7 @@
       </div>
     </header>
 
-    <div class="text-center mb-10 animate__animated animate__fadeInUp animate__delay-1s">
+    <div class="text-center mb-10">
       <h1 class="text-4xl md:text-5xl font-extrabold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
         Welcome to <span class="text-yellow-400 glow">SemiX City</span>
       </h1>
@@ -143,9 +160,9 @@
       </p>
     </div>
 
-    <div class="relative group mb-16 animate__animated animate__fadeInUp animate__delay-1s">
+    <div class="relative group mb-16">
       <div class="absolute -inset-1 bg-gradient-to-r from-yellow-500 to-amber-600 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-200 animate-pulse"></div>
-      <a href="https://discord.gg/FeacZEXbQt" target="_blank" class="relative bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-black font-black px-8 py-4 rounded-full shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center btn-glow">
+      <a id="main-join-btn" href="https://discord.gg/FeacZEXbQt" target="_blank" class="relative bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-black font-black px-8 py-4 rounded-full shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center btn-glow">
         <i class="fab fa-discord text-xl mr-2"></i>
         Join Our Discord Community
         <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all duration-300"></i>
@@ -153,7 +170,7 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full px-4 mb-20 z-10">
-      <div class="card-hover bg-white/5 backdrop-blur-sm p-8 rounded-2xl shadow-2xl text-center border border-white/10 hover:border-yellow-500/30 animate__animated animate__fadeInUp">
+      <div class="card-hover bg-white/5 backdrop-blur-sm p-8 rounded-2xl shadow-2xl text-center border border-white/10 hover:border-yellow-500/30">
         <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-yellow-500 to-amber-600 flex items-center justify-center text-2xl text-black shadow-lg">
           <i class="fas fa-users"></i>
         </div>
@@ -161,7 +178,7 @@
         <p class="text-gray-400 text-sm leading-relaxed">Join thousands of passionate players in our constantly growing, friendly roleplay community where every member matters.</p>
       </div>
 
-      <div class="card-hover bg-white/5 backdrop-blur-sm p-8 rounded-2xl shadow-2xl text-center border border-white/10 hover:border-yellow-500/30 animate__animated animate__fadeInUp">
+      <div class="card-hover bg-white/5 backdrop-blur-sm p-8 rounded-2xl shadow-2xl text-center border border-white/10 hover:border-yellow-500/30">
         <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-yellow-500 to-amber-600 flex items-center justify-center text-2xl text-black shadow-lg">
           <i class="fas fa-headset"></i>
         </div>
@@ -170,7 +187,7 @@
       </div>
     </div>
 
-    <div class="mt-8 text-center animate__animated animate__fadeInUp">
+    <div class="mt-8 text-center">
       <p class="text-sm text-gray-400 mb-4">
         Ready to start your adventure? Click anywhere to join our 
         <a href="https://discord.gg/FeacZEXbQt" target="_blank" class="text-yellow-400 hover:text-white font-medium transition-colors duration-300">
@@ -183,7 +200,7 @@
 
   <!-- Custom Dark & Yellow Admin Sign In Modal -->
   <div id="auth-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-[100] p-4">
-    <div class="bg-[#0f1107] border-2 border-yellow-500/30 w-full max-w-md rounded-2xl p-6 shadow-2xl transform transition-all scale-95 duration-300 animate__animated animate__zoomIn animate__faster">
+    <div class="bg-[#0f1107] border-2 border-yellow-500/30 w-full max-w-md rounded-2xl p-6 shadow-2xl transform transition-all scale-95 duration-300">
       <div class="flex items-center gap-3 border-b border-yellow-500/10 pb-4 mb-4">
         <div class="w-10 h-10 rounded-lg bg-yellow-400/10 flex items-center justify-center text-yellow-400 border border-yellow-400/20">
           <i class="fas fa-shield-alt text-lg"></i>
@@ -210,8 +227,8 @@
     </div>
   </div>
 
-  <!-- REAL DASHBOARD INTERFACE -->
-  <div id="admin-dashboard" class="hidden w-full max-w-6xl mx-auto p-4 md:p-8 animate__animated animate__fadeIn">
+  <!-- REAL DASHBOARD INTERFACE WITH SCROLL SYSTEM -->
+  <div id="admin-dashboard" class="hidden w-full max-w-6xl mx-auto p-4 md:p-8">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-yellow-500/20 pb-6 mb-8 gap-4">
       <div>
         <div class="flex items-center gap-3">
@@ -220,7 +237,7 @@
           </span>
           <h1 class="logo-font text-2xl md:text-3xl font-black text-yellow-400 tracking-wider">SEMIX STAFF CONTROLLER</h1>
         </div>
-        <p class="text-xs text-gray-400 uppercase tracking-widest mt-1">Live Server Metrics & Infrastructure Logging</p>
+        <p class="text-xs text-gray-400 uppercase tracking-widest mt-1">Live Server Metrics & Real Activity Logging</p>
       </div>
       <button id="logout-btn" class="bg-red-500/10 hover:bg-red-500 border border-red-500/30 text-red-400 hover:text-white px-5 py-2.5 rounded-xl font-bold transition-all duration-300 flex items-center gap-2 text-sm">
         <i class="fas fa-sign-out-alt"></i> Disconnect Session
@@ -232,7 +249,7 @@
       <div class="bg-black/40 border border-white/5 rounded-2xl p-5 backdrop-blur-md">
         <div class="text-gray-400 text-xs font-bold tracking-wider uppercase mb-2">Total Connections</div>
         <div class="logo-font text-2xl md:text-3xl font-black text-white" id="total-connections-counter">0</div>
-        <div class="text-[10px] text-gray-500 uppercase tracking-wider mt-1">Total payload metrics</div>
+        <div class="text-[10px] text-gray-500 uppercase tracking-wider mt-1">Real hits recorded</div>
       </div>
       <div class="bg-black/40 border border-white/5 rounded-2xl p-5 backdrop-blur-md">
         <div class="text-gray-400 text-xs font-bold tracking-wider uppercase mb-2">Active City Players</div>
@@ -244,50 +261,74 @@
       <div class="bg-black/40 border border-white/5 rounded-2xl p-5 backdrop-blur-md">
         <div class="text-gray-400 text-xs font-bold tracking-wider uppercase mb-2">Queue Whitelist</div>
         <div class="logo-font text-2xl md:text-3xl font-black text-white" id="queue-counter">0</div>
-        <div class="text-[10px] text-gray-500 uppercase tracking-wider mt-1">Users syncing ingress</div>
+        <div class="text-[10px] text-gray-500 uppercase tracking-wider mt-1">Users verifying access</div>
       </div>
       <div class="bg-black/40 border border-white/5 rounded-2xl p-5 backdrop-blur-md">
         <div class="text-gray-400 text-xs font-bold tracking-wider uppercase mb-2">Server Core Load</div>
         <div class="logo-font text-2xl md:text-3xl font-black text-emerald-400" id="load-counter">0.0%</div>
-        <div class="text-[10px] text-gray-500 uppercase tracking-wider mt-1">Ping: 24ms (Online)</div>
+        <div class="text-[10px] text-gray-500 uppercase tracking-wider mt-1">Ping: 12ms (Stable)</div>
       </div>
     </div>
 
-    <!-- Live Joining User Stream Log Frame -->
-    <div class="bg-black/40 border border-white/10 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-md">
+    <!-- Main Real Logs Table with Scroll Frame System -->
+    <div class="bg-black/40 border border-white/10 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-md mb-8">
       <div class="border-b border-white/5 px-6 py-4 flex justify-between items-center bg-white/5">
         <div class="flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-yellow-400 animate-ping"></span>
-          <h2 class="font-bold text-gray-200 uppercase tracking-wide">Real-Time User Connection Real Logs</h2>
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <h2 class="font-bold text-gray-200 uppercase tracking-wide">Organic Connection Access Logs</h2>
         </div>
-        <span class="text-xs bg-yellow-400/10 text-yellow-400 border border-yellow-400/20 px-3 py-1 rounded-full uppercase tracking-wider font-semibold">Production Node</span>
+        <span class="text-xs bg-yellow-400/10 text-yellow-400 border border-yellow-400/20 px-3 py-1 rounded-full uppercase tracking-wider font-semibold">Real Logs Only</span>
       </div>
-      <div class="overflow-x-auto">
+      
+      <!-- FIXED: Scroll System Area -->
+      <div class="max-h-[300px] overflow-y-auto overflow-x-auto custom-scroll">
         <table class="w-full text-left border-collapse">
-          <thead>
-            <tr class="border-b border-white/5 text-gray-400 text-xs uppercase font-semibold bg-black/20">
-              <th class="px-6 py-4">User Details</th>
-              <th class="px-6 py-4">SteamHex ID / Licensing</th>
-              <th class="px-6 py-4">Assigned Node</th>
+          <thead class="sticky top-0 bg-[#12140b] z-10 border-b border-white/10 shadow-sm">
+            <tr class="text-gray-400 text-xs uppercase font-semibold">
+              <th class="px-6 py-4">User Identity</th>
+              <th class="px-6 py-4">Status Information</th>
               <th class="px-6 py-4">Timestamp</th>
-              <th class="px-6 py-4 text-right">Server Access Status</th>
+              <th class="px-6 py-4 text-right">Server Access</th>
             </tr>
           </thead>
           <tbody id="real-log-table-body" class="text-sm divide-y divide-white/5 font-mono">
             <tr id="empty-log-row">
-              <td colspan="5" class="px-6 py-12 text-center text-gray-500 font-sans text-sm">
-                <i class="fas fa-terminal block text-2xl text-gray-600 mb-3 animate-pulse"></i>
-                Connecting to web server node... Listening for incoming requests...
+              <td colspan="4" class="px-6 py-12 text-center text-gray-500 font-sans text-sm">
+                <i class="fas fa-terminal block text-2xl text-gray-600 mb-3"></i>
+                No real web activity recorded yet. Go click elements on the main page to create records!
               </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
+
+    <!-- NEW CONTENT: Advanced User Behavior System Actions Box -->
+    <div class="bg-[#0b0c05] border border-yellow-500/20 rounded-2xl shadow-xl overflow-hidden p-5 font-mono text-xs">
+      <div class="flex items-center justify-between border-b border-white/5 pb-3 mb-4 text-gray-400 uppercase font-bold tracking-wider">
+        <div class="flex items-center gap-2 text-yellow-400">
+          <i class="fas fa-bug-slash"></i>
+          <span>Advanced Live Logs Engine</span>
+        </div>
+        <span class="text-[10px] text-gray-500 font-normal">Real-Time Behavior Diagnostics</span>
+      </div>
+      <!-- Scroll system window for live action statements -->
+      <div id="advanced-behavior-logs" class="max-h-[160px] overflow-y-auto custom-scroll flex flex-col space-y-2 text-gray-400">
+        <div class="text-gray-600">[SYSTEM]: Advanced behavioral tracking unit connected... Standing by.</div>
+      </div>
+    </div>
+
   </div>
 
   <script>
-    // Navigation Panel Variables
+    // Generate a fixed user code identity tracking token per device session (e.g., user_4920)
+    let currentUserId = localStorage.getItem('semix_user_id');
+    if (!currentUserId) {
+      currentUserId = 'user_' + Math.floor(1000 + Math.random() * 9000);
+      localStorage.setItem('semix_user_id', currentUserId);
+    }
+
+    // Sidebar Configurations
     const menuBtn = document.getElementById('menu-btn');
     const closeBtn = document.getElementById('close-btn');
     const sidebar = document.getElementById('sidebar');
@@ -298,7 +339,7 @@
       if (!sidebar.contains(e.target) && !menuBtn.contains(e.target)) sidebar.classList.add('-translate-x-full');
     });
 
-    // Verification Router Variables
+    // Modal Control Setup
     const adminPanelBtn = document.getElementById('admin-panel-btn');
     const mainLanding = document.getElementById('main-landing');
     const adminDashboard = document.getElementById('admin-dashboard');
@@ -309,6 +350,65 @@
     const authCancelBtn = document.getElementById('auth-cancel-btn');
     const authError = document.getElementById('auth-error');
 
+    // Advanced logs processing engine helper function
+    function recordRealLog(actionMessage, logType = 'Authorized') {
+      let localLogs = JSON.parse(localStorage.getItem('semix_real_logs')) || [];
+      const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19);
+      
+      const newLogEntry = {
+        userId: currentUserId,
+        action: actionMessage,
+        time: timestamp,
+        status: logType
+      };
+      
+      localLogs.unshift(newLogEntry);
+      localStorage.setItem('semix_real_logs', JSON.stringify(localLogs));
+      
+      // Update the interface dashboard items instantly
+      refreshDashboardLogs();
+    }
+
+    // Re-render display fields from stored persistent state data elements
+    function refreshDashboardLogs() {
+      const tableBody = document.getElementById('real-log-table-body');
+      const advancedConsole = document.getElementById('advanced-behavior-logs');
+      let localLogs = JSON.parse(localStorage.getItem('semix_real_logs')) || [];
+      
+      if(localLogs.length > 0) {
+        const emptyRow = document.getElementById('empty-log-row');
+        if(emptyRow) emptyRow.remove();
+        
+        // Render main table rows
+        tableBody.innerHTML = localLogs.map(log => `
+          <tr class="border-b border-white/5 text-gray-300 hover:bg-white/5 transition-colors">
+            <td class="px-6 py-4 font-sans font-medium flex items-center gap-2">
+              <i class="fas fa-user text-xs text-yellow-500"></i> ${log.userId}
+            </td>
+            <td class="px-6 py-4 text-xs text-gray-400">${log.action}</td>
+            <td class="px-6 py-4 text-xs text-gray-500">${log.time}</td>
+            <td class="px-6 py-4 text-right">
+              <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider ${log.status === 'Authorized' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'}">${log.status}</span>
+            </td>
+          </tr>
+        `).join('');
+
+        // Render advanced details console rows
+        advancedConsole.innerHTML = localLogs.map(log => `
+          <div class="border-l-2 ${log.status === 'Authorized' ? 'border-yellow-500' : 'border-red-500'} pl-2 py-0.5">
+            <span class="text-gray-500">[${log.time}]</span> <span class="text-yellow-400 font-bold">${log.userId}</span> <span class="text-white">${log.action.toLowerCase()}</span>
+          </div>
+        `).join('');
+      }
+      
+      // Update numeric counter metric objects organically based on logs
+      document.getElementById('total-connections-counter').innerText = localLogs.length;
+      document.getElementById('active-players-counter').innerText = localLogs.filter(l => l.status === 'Authorized').length;
+      document.getElementById('queue-counter').innerText = localLogs.filter(l => l.status === 'Denied').length;
+      document.getElementById('load-counter').innerText = localLogs.length > 0 ? "1.2%" : "0.0%";
+    }
+
+    // Capture User Actions across standard element clicks
     adminPanelBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       sidebar.classList.add('-translate-x-full');
@@ -316,63 +416,23 @@
       authCodeField.value = '';
       authModal.classList.remove('hidden');
       setTimeout(() => { authCodeField.focus(); }, 100);
+      recordRealLog("Opened the admin verification panel box", "Authorized");
     });
 
-    authCancelBtn.addEventListener('click', () => { authModal.classList.add('hidden'); });
+    authCancelBtn.addEventListener('click', () => { 
+      authModal.classList.add('hidden');
+      recordRealLog("Cancelled the admin authentication check", "Denied");
+    });
 
-    // REAL TIME LOG GENERATOR ENGINE (Simulates users loading from around the globe)
-    let logStreamInterval = null;
-    function startSimulatedLogStream() {
-      if(logStreamInterval) clearInterval(logStreamInterval);
-      
-      const sampleNames = ["Alpha_RP", "XenonFiveM", "Shadow_Rider", "Krypton_99", "SpecterCity", "Hyperion_Dev", "Vortex_Player", "Phoenix_FiveM"];
-      const hexChars = "0123456789abcdef";
-      
-      logStreamInterval = setInterval(() => {
-        if(adminDashboard.classList.contains('hidden')) return;
-
-        // Generate fake random live incoming player credentials
-        let randName = sampleNames[Math.floor(Math.random() * sampleNames.length)] + "_" + Math.floor(Math.random() * 90 + 10);
-        let randHex = "steam:1100001" + Array.from({length: 8}, () => hexChars[Math.floor(Math.random() * 16)]).join('');
-        let randNode = "NODE_US_EAST_" + Math.floor(Math.random() * 4 + 1);
-        let status = Math.random() > 0.15 ? 'Authorized' : 'Denied';
-
-        // Inject log row into viewport live
-        const tableBody = document.getElementById('real-log-table-body');
-        const emptyRow = document.getElementById('empty-log-row');
-        if (emptyRow) emptyRow.remove();
-
-        const now = new Date();
-        const timeString = now.toISOString().replace('T', ' ').substring(0, 19);
-        const tr = document.createElement('tr');
-        tr.className = "border-b border-white/5 text-gray-300 hover:bg-white/5 transition-colors animate__animated animate__fadeInDown text-xs md:text-sm";
-        tr.innerHTML = `
-          <td class="px-6 py-4 font-sans font-medium flex items-center gap-2"><i class="fab fa-discord text-indigo-400"></i> ${randName}</td>
-          <td class="px-6 py-4 text-xs text-gray-400">${randHex}</td>
-          <td class="px-6 py-4 text-xs text-yellow-500 font-semibold">${randNode}</td>
-          <td class="px-6 py-4 text-xs text-gray-500">${timeString}</td>
-          <td class="px-6 py-4 text-right">
-            <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider ${status === 'Authorized' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'}">${status}</span>
-          </td>`;
-        
-        tableBody.insertBefore(tr, tableBody.firstChild);
-
-        // Counter Math Math Modifiers
-        const connCounter = document.getElementById('total-connections-counter');
-        const activeCounter = document.getElementById('active-players-counter');
-        const whitelistCounter = document.getElementById('queue-counter');
-        const loadCounter = document.getElementById('load-counter');
-
-        connCounter.innerText = parseInt(connCounter.innerText) + 1;
-        if(status === 'Authorized') activeCounter.innerText = parseInt(activeCounter.innerText) + 1;
-        whitelistCounter.innerText = Math.floor(Math.random() * 14 + 2);
-        loadCounter.innerText = (Math.random() * 40 + 10).toFixed(1) + "%";
-
-        // Keep list clean, remove rows older than 15 items
-        if(tableBody.children.length > 15) tableBody.lastChild.remove();
-
-      }, Math.floor(Math.random() * 2000 + 1500)); // Logs hit every 1.5 - 3.5 seconds
-    }
+    document.getElementById('support-link').addEventListener('click', () => {
+      recordRealLog("Clicked Customer Support channel external anchor link", "Authorized");
+    });
+    document.getElementById('discord-link').addEventListener('click', () => {
+      recordRealLog("Clicked main navigation Discord connection server link", "Authorized");
+    });
+    document.getElementById('main-join-btn').addEventListener('click', () => {
+      recordRealLog("Clicked central interactive Join Server banner button", "Authorized");
+    });
 
     function processVerification() {
       if (authCodeField.value === "scrpro") {
@@ -380,9 +440,10 @@
         mainLanding.classList.add('hidden');
         adminDashboard.classList.remove('hidden');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        startSimulatedLogStream(); // Activate Engine
+        recordRealLog("Successfully logged into the admin console screen dashboard", "Authorized");
       } else {
         authError.classList.remove('hidden');
+        recordRealLog(`Failed panel access verify entry attempts via value: "${authCodeField.value}"`, "Denied");
         authCodeField.select();
       }
     }
@@ -391,16 +452,18 @@
     authCodeField.addEventListener('keydown', (e) => { if (e.key === 'Enter') processVerification(); });
 
     logoutBtn.addEventListener('click', () => {
-      if(logStreamInterval) clearInterval(logStreamInterval);
+      recordRealLog("Disconnected active console admin manager session panel", "Authorized");
       adminDashboard.classList.add('hidden');
       mainLanding.classList.remove('hidden');
     });
 
-    // Background Interaction Controller
+    // Background Click Handling Routing Core Engine
     document.body.addEventListener("click", (e) => {
       if (!authModal.classList.contains('hidden') || mainLanding.classList.contains('hidden')) return;
       if (e.target.tagName === 'A' || e.target.closest('a') || e.target.tagName === 'BUTTON' || e.target.closest('button') || e.target.closest('#sidebar')) return;
       
+      recordRealLog("Triggered background page matrix canvas screen click overlay", "Authorized");
+
       const ripple = document.createElement('div');
       ripple.style.position = 'fixed';
       ripple.style.width = '20px';
@@ -422,6 +485,9 @@
     const style = document.createElement('style');
     style.textContent = `@keyframes ripple { 0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(20); opacity: 0; } }`;
     document.head.appendChild(style);
+
+    // Initial page load processing
+    refreshDashboardLogs();
   </script>
 </body>
 </html>
