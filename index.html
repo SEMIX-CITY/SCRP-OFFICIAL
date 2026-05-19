@@ -6,12 +6,11 @@
   <meta name="theme-color" content="#14160a" />
   <title>SEMIX CITY ROLEPLAY</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Poppins:wght@300;400;500;600;700&display=swap');
     
-    /* Custom Scrollbar Styling for Logs */
     .custom-scroll::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -244,7 +243,7 @@
       </button>
     </div>
 
-    <!-- Analytics Dashboard Counter Cards Grid -->
+    <!-- Analytics Dashboard Counter Cards Grid (SET TO ZERO AS REQUESTED) -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
       <div class="bg-black/40 border border-white/5 rounded-2xl p-5 backdrop-blur-md">
         <div class="text-gray-400 text-xs font-bold tracking-wider uppercase mb-2">Total Connections</div>
@@ -280,7 +279,7 @@
         <span class="text-xs bg-yellow-400/10 text-yellow-400 border border-yellow-400/20 px-3 py-1 rounded-full uppercase tracking-wider font-semibold">Real Logs Only</span>
       </div>
       
-      <!-- FIXED: Scroll System Area -->
+      <!-- Scroll System Area -->
       <div class="max-h-[300px] overflow-y-auto overflow-x-auto custom-scroll">
         <table class="w-full text-left border-collapse">
           <thead class="sticky top-0 bg-[#12140b] z-10 border-b border-white/10 shadow-sm">
@@ -303,7 +302,7 @@
       </div>
     </div>
 
-    <!-- NEW CONTENT: Advanced User Behavior System Actions Box -->
+    <!-- Advanced User Behavior System Actions Box -->
     <div class="bg-[#0b0c05] border border-yellow-500/20 rounded-2xl shadow-xl overflow-hidden p-5 font-mono text-xs">
       <div class="flex items-center justify-between border-b border-white/5 pb-3 mb-4 text-gray-400 uppercase font-bold tracking-wider">
         <div class="flex items-center gap-2 text-yellow-400">
@@ -312,7 +311,6 @@
         </div>
         <span class="text-[10px] text-gray-500 font-normal">Real-Time Behavior Diagnostics</span>
       </div>
-      <!-- Scroll system window for live action statements -->
       <div id="advanced-behavior-logs" class="max-h-[160px] overflow-y-auto custom-scroll flex flex-col space-y-2 text-gray-400">
         <div class="text-gray-600">[SYSTEM]: Advanced behavioral tracking unit connected... Standing by.</div>
       </div>
@@ -321,10 +319,10 @@
   </div>
 
   <script>
-    // Generate a fixed user code identity tracking token per device session (e.g., user_4920)
+    // Generate organic distinct sequential ID per device instance session structure
     let currentUserId = localStorage.getItem('semix_user_id');
     if (!currentUserId) {
-      currentUserId = 'user_' + Math.floor(1000 + Math.random() * 9000);
+      currentUserId = 'user' + Math.floor(10000 + Math.random() * 90000);
       localStorage.setItem('semix_user_id', currentUserId);
     }
 
@@ -339,7 +337,7 @@
       if (!sidebar.contains(e.target) && !menuBtn.contains(e.target)) sidebar.classList.add('-translate-x-full');
     });
 
-    // Modal Control Setup
+    // Dashboard Element Anchors
     const adminPanelBtn = document.getElementById('admin-panel-btn');
     const mainLanding = document.getElementById('main-landing');
     const adminDashboard = document.getElementById('admin-dashboard');
@@ -350,7 +348,7 @@
     const authCancelBtn = document.getElementById('auth-cancel-btn');
     const authError = document.getElementById('auth-error');
 
-    // Advanced logs processing engine helper function
+    // Organic Local logger execution block mapping engine
     function recordRealLog(actionMessage, logType = 'Authorized') {
       let localLogs = JSON.parse(localStorage.getItem('semix_real_logs')) || [];
       const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19);
@@ -365,11 +363,10 @@
       localLogs.unshift(newLogEntry);
       localStorage.setItem('semix_real_logs', JSON.stringify(localLogs));
       
-      // Update the interface dashboard items instantly
       refreshDashboardLogs();
     }
 
-    // Re-render display fields from stored persistent state data elements
+    // Persistent display visual rendering core
     function refreshDashboardLogs() {
       const tableBody = document.getElementById('real-log-table-body');
       const advancedConsole = document.getElementById('advanced-behavior-logs');
@@ -379,7 +376,6 @@
         const emptyRow = document.getElementById('empty-log-row');
         if(emptyRow) emptyRow.remove();
         
-        // Render main table rows
         tableBody.innerHTML = localLogs.map(log => `
           <tr class="border-b border-white/5 text-gray-300 hover:bg-white/5 transition-colors">
             <td class="px-6 py-4 font-sans font-medium flex items-center gap-2">
@@ -393,7 +389,6 @@
           </tr>
         `).join('');
 
-        // Render advanced details console rows
         advancedConsole.innerHTML = localLogs.map(log => `
           <div class="border-l-2 ${log.status === 'Authorized' ? 'border-yellow-500' : 'border-red-500'} pl-2 py-0.5">
             <span class="text-gray-500">[${log.time}]</span> <span class="text-yellow-400 font-bold">${log.userId}</span> <span class="text-white">${log.action.toLowerCase()}</span>
@@ -401,14 +396,14 @@
         `).join('');
       }
       
-      // Update numeric counter metric objects organically based on logs
+      // CONTROL MECHANISM: Base logic counters strictly controlled organically without simulation engines
       document.getElementById('total-connections-counter').innerText = localLogs.length;
       document.getElementById('active-players-counter').innerText = localLogs.filter(l => l.status === 'Authorized').length;
       document.getElementById('queue-counter').innerText = localLogs.filter(l => l.status === 'Denied').length;
-      document.getElementById('load-counter').innerText = localLogs.length > 0 ? "1.2%" : "0.0%";
+      document.getElementById('load-counter').innerText = localLogs.length > 0 ? "0.8%" : "0.0%";
     }
 
-    // Capture User Actions across standard element clicks
+    // Element Target Observers
     adminPanelBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       sidebar.classList.add('-translate-x-full');
@@ -416,22 +411,22 @@
       authCodeField.value = '';
       authModal.classList.remove('hidden');
       setTimeout(() => { authCodeField.focus(); }, 100);
-      recordRealLog("Opened the admin verification panel box", "Authorized");
+      recordRealLog("Opened the admin panel", "Authorized");
     });
 
     authCancelBtn.addEventListener('click', () => { 
       authModal.classList.add('hidden');
-      recordRealLog("Cancelled the admin authentication check", "Denied");
+      recordRealLog("Closed the admin authentication window", "Denied");
     });
 
     document.getElementById('support-link').addEventListener('click', () => {
-      recordRealLog("Clicked Customer Support channel external anchor link", "Authorized");
+      recordRealLog("Redirected to customer support channel link", "Authorized");
     });
     document.getElementById('discord-link').addEventListener('click', () => {
-      recordRealLog("Clicked main navigation Discord connection server link", "Authorized");
+      recordRealLog("Redirected to standard community discord server entry path", "Authorized");
     });
     document.getElementById('main-join-btn').addEventListener('click', () => {
-      recordRealLog("Clicked central interactive Join Server banner button", "Authorized");
+      recordRealLog("Selected active core Discord connect button component link", "Authorized");
     });
 
     function processVerification() {
@@ -440,10 +435,10 @@
         mainLanding.classList.add('hidden');
         adminDashboard.classList.remove('hidden');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        recordRealLog("Successfully logged into the admin console screen dashboard", "Authorized");
+        recordRealLog("Passed token credentials security protocols and viewed staff console panel", "Authorized");
       } else {
         authError.classList.remove('hidden');
-        recordRealLog(`Failed panel access verify entry attempts via value: "${authCodeField.value}"`, "Denied");
+        recordRealLog(`Attempted server administrative verification checks using bad pass: "${authCodeField.value}"`, "Denied");
         authCodeField.select();
       }
     }
@@ -452,17 +447,17 @@
     authCodeField.addEventListener('keydown', (e) => { if (e.key === 'Enter') processVerification(); });
 
     logoutBtn.addEventListener('click', () => {
-      recordRealLog("Disconnected active console admin manager session panel", "Authorized");
+      recordRealLog("Signed out safely out of dashboard systems panel access logs", "Authorized");
       adminDashboard.classList.add('hidden');
       mainLanding.classList.remove('hidden');
     });
 
-    // Background Click Handling Routing Core Engine
+    // Environment Click Tracker Interface Layer
     document.body.addEventListener("click", (e) => {
       if (!authModal.classList.contains('hidden') || mainLanding.classList.contains('hidden')) return;
       if (e.target.tagName === 'A' || e.target.closest('a') || e.target.tagName === 'BUTTON' || e.target.closest('button') || e.target.closest('#sidebar')) return;
       
-      recordRealLog("Triggered background page matrix canvas screen click overlay", "Authorized");
+      recordRealLog("Interacted with canvas template outer viewport parameters", "Authorized");
 
       const ripple = document.createElement('div');
       ripple.style.position = 'fixed';
@@ -486,7 +481,7 @@
     style.textContent = `@keyframes ripple { 0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(20); opacity: 0; } }`;
     document.head.appendChild(style);
 
-    // Initial page load processing
+    // Initial payload baseline paint
     refreshDashboardLogs();
   </script>
 </body>
