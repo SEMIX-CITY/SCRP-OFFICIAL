@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Poppins:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@200;900&family=Russo+One&display=swap');
     
     .custom-scroll::-webkit-scrollbar {
       width: 6px;
@@ -76,24 +76,276 @@
     .btn-glow:hover:before {
       left: 100%;
     }
+
+    /* ==========================================================================
+       ADVANCED TWO-STAGE CUTSCENE ENGINE
+       ========================================================================== */
+    .perspective-container {
+      perspective: 1200px;
+    }
+
+    .scrp-font {
+      font-family: 'Russo One', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      transform: scaleY(1.1);
+    }
+    
+    .scrp-subfont {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 200;
+      letter-spacing: 0.55em;
+      opacity: 0;
+      animation: fadeInRoleplay 0.6s ease forwards;
+      animation-delay: 1.5s;
+    }
+
+    .type-char {
+      display: inline-block;
+      opacity: 0;
+      transform: scale(0.5);
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+    .type-char:nth-child(1) { animation-delay: 0.3s; }
+    .type-char:nth-child(2) { animation-delay: 0.6s; }
+    .type-char:nth-child(3) { animation-delay: 0.9s; }
+    .type-char:nth-child(4) { animation-delay: 1.2s; }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.5); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeInRoleplay {
+      to { opacity: 1; }
+    }
+
+    .scrp-reveal-wrapper {
+      animation: fadeOutStage 0.6s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+      animation-delay: 3.0s;
+    }
+
+    @keyframes fadeOutStage {
+      0% { transform: scale(1) translateZ(0); opacity: 1; filter: blur(0px); }
+      100% { transform: scale(1.15) translateZ(100px); opacity: 0; filter: blur(15px); }
+    }
+
+    .logo-char {
+      display: inline-block;
+      opacity: 0;
+      transform: translate3d(0, -200px, 600px) scale(0.2) rotateX(-90deg);
+      filter: blur(12px) brightness(3);
+      animation: logoJumpIn 1.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    .logo-char:nth-child(1) { animation-delay: 3.40s; }
+    .logo-char:nth-child(2) { animation-delay: 3.48s; }
+    .logo-char:nth-child(3) { animation-delay: 3.56s; }
+    .logo-char:nth-child(4) { animation-delay: 3.64s; }
+    .logo-char:nth-child(5) { animation-delay: 3.72s; }
+    .logo-char:nth-child(6) { animation-delay: 3.85s; }
+    .logo-char:nth-child(7) { animation-delay: 3.93s; }
+    .logo-char:nth-child(8) { animation-delay: 4.01s; }
+    .logo-char:nth-child(9) { animation-delay: 4.09s; }
+
+    @keyframes logoJumpIn {
+      0% { opacity: 0; transform: translate3d(0, -200px, 600px) scale(0.2) rotateX(-90deg); filter: blur(12px) brightness(3); }
+      65% { transform: translate3d(0, 20px, -60px) scale(1.08) rotateX(20deg); filter: blur(0px) brightness(1.6); text-shadow: 0 0 50px rgba(234, 179, 8, 0.85); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1) rotateX(0deg); filter: blur(0px) brightness(1); text-shadow: 0 0 15px rgba(234, 179, 8, 0.3); }
+    }
+
+    .shockwave-blast {
+      animation: expandRing 0.9s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
+      animation-delay: 4.35s;
+    }
+
+    @keyframes expandRing {
+      0% { width: 30px; height: 30px; opacity: 0; transform: scale3d(0.5, 0.5, 1); border-color: #ffffff; box-shadow: 0 0 20px #ffffff; }
+      15% { opacity: 1; }
+      100% { width: 800px; height: 800px; opacity: 0; transform: scale3d(2, 2, 1); border-color: #eab308; box-shadow: 0 0 80px rgba(234, 179, 8, 0); }
+    }
+
+    .cutscene-fade-out {
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transform: scale(1.05);
+    }
+
+    /* --- Stage 2.5: Kinetic SC & RP Scroll Collision Framework --- */
+    .collision-panel {
+      position: fixed;
+      inset: 0;
+      z-index: 9998; 
+      background: #0c0d06;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .sc-left, .rp-right {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12vw;
+      font-weight: 900;
+      position: absolute;
+      will-change: transform;
+    }
+    
+    .sc-left { left: 0; transform: translateX(-100vw); color: #ffffff; }
+    .rp-right { right: 0; transform: translateX(100vw); color: #eab308; }
+
+    .sc-scroll-in { animation: slideLeftToCenter 1.0s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+    .rp-scroll-in { animation: slideRightToCenter 1.0s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+
+    @keyframes slideLeftToCenter {
+      0% { transform: translateX(-100vw); filter: blur(4px); }
+      100% { transform: translateX(calc(50vw - 100%)); filter: blur(0px); }
+    }
+    @keyframes slideRightToCenter {
+      0% { transform: translateX(100vw); filter: blur(4px); }
+      100% { transform: translateX(calc(-50vw + 100%)); filter: blur(0px); }
+    }
+
+    .collision-ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 40px; height: 40px;
+      border: 6px solid #ffffff;
+      border-radius: 50%;
+      opacity: 0;
+      z-index: 10;
+    }
+
+    .ring-blast-active { animation: expandCollisionRing 1.0s cubic-bezier(0.1, 0.8, 0.1, 1) forwards; }
+
+    @keyframes expandCollisionRing {
+      0% { transform: translate(-50%, -50%) scale(0.2); opacity: 1; border-color: #ffffff; box-shadow: 0 0 30px #ffffff; }
+      40% { border-color: #eab308; box-shadow: 0 0 60px #eab308; }
+      100% { transform: translate(-50%, -50%) scale(60); opacity: 0; border-color: #eab308; }
+    }
+
+    /* --- Administrative Intercept Cinematic Framework --- */
+    .admin-cutscene-overlay {
+      position: fixed;
+      inset: 0;
+      background: #080904;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      transition: opacity 0.5s ease-out;
+    }
+
+    .admin-shock-ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 50px; height: 50px;
+      border: 4px solid #eab308;
+      border-radius: 50%;
+      opacity: 0;
+    }
+
+    .admin-shock-active { animation: adminBlast 0.7s cubic-bezier(0.1, 0.8, 0.1, 1) forwards; }
+
+    @keyframes adminBlast {
+      0% { transform: translate(-50%, -50%) scale(0.1); opacity: 1; border-color: #ffffff; box-shadow: 0 0 30px #ffffff; }
+      100% { transform: translate(-50%, -50%) scale(45); opacity: 0; border-color: #eab308; box-shadow: 0 0 60px rgba(234,179,8,0); }
+    }
+
+    /* Radar Background Canvas Layer */
+    .radar-container {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90vw; height: 90vw;
+      max-width: 800px; max-height: 800px;
+      border: 1px solid rgba(234, 179, 8, 0.02);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -5;
+    }
+    .radar-container::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, rgba(234, 179, 8, 0.06) 0deg, rgba(234, 179, 8, 0.01) 90deg, transparent 180deg);
+      animation: radarSweep 8s linear infinite;
+    }
+    @keyframes radarSweep { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
   </style>
 </head>
 <body class="text-white flex flex-col items-center justify-center min-h-[100dvh] p-4 md:p-6 overflow-x-hidden relative">
   
-  <!-- Main Website Interface Wrapper -->
+  <div id="admin-cutscene-portal"></div>
+
+  <div class="radar-container">
+    <div class="absolute top-[15%] left-[15%] right-[15%] bottom-[15%] border border-dashed border-yellow-500/5 rounded-full"></div>
+    <div class="radar-blip absolute w-1 h-1 bg-yellow-500 rounded-full top-[20%] left-[30%] opacity-40 shadow-[0_0_8px_#eab308]"></div>
+  </div>
+
+  <div id="intro-cutscene" class="fixed inset-0 bg-[#0c0d06] z-[9999] flex flex-col items-center justify-center overflow-hidden transition-all duration-1000">
+    <div class="absolute inset-0 bg-radial-gradient from-yellow-500/5 via-transparent to-transparent opacity-70"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(234,179,8,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(234,179,8,0.01)_1px,transparent_1px)] bg-[size:40px_40px] opacity-40 [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)]"></div>
+    
+    <div class="relative flex flex-col items-center justify-center select-none perspective-container w-full h-full">
+      
+      <div class="scrp-reveal-wrapper absolute flex flex-col items-center justify-center text-center">
+        <div class="scrp-font text-7xl md:text-8xl uppercase flex items-center justify-center text-white filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)]">
+          <span class="type-char pr-1">S</span>
+          <span class="type-char pr-1">C</span>
+          <span class="type-char pr-1">R</span>
+          <span class="type-char text-[#eab308]">P</span>
+        </div>
+        <div class="scrp-subfont text-sm md:text-base text-gray-400/90 uppercase mt-2 flex items-center justify-center">
+          ROLE<span class="text-[#eab308] font-normal mx-0.5">P</span>LAY
+        </div>
+      </div>
+
+      <div id="intro-shockwave" class="absolute w-32 h-32 border-2 border-yellow-400 rounded-full opacity-0 pointer-events-none"></div>
+
+      <div id="intro-logo" class="logo-font text-5xl md:text-7xl font-black tracking-wider flex items-center justify-center uppercase mb-3 select-none">
+        <span class="text-white logo-char">S</span>
+        <span class="text-white logo-char">E</span>
+        <span class="text-yellow-400 bg-yellow-400/10 px-2 mx-1 rounded-sm border border-yellow-400/20 logo-char">M</span>
+        <span class="text-white logo-char">I</span>
+        <span class="text-white logo-char">X</span>
+        <span class="text-yellow-400 ml-5 logo-char">C</span>
+        <span class="text-yellow-400 logo-char">I</span>
+        <span class="text-yellow-400 logo-char">T</span>
+        <span class="text-yellow-400 logo-char">Y</span>
+      </div>
+
+      <div id="intro-subtitle" class="text-xs md:text-sm tracking-[0.6em] text-gray-500 font-light uppercase pl-[0.6em] opacity-0 transition-all duration-700">
+        R O L E P L A Y &nbsp; P A R A D I G M
+      </div>
+    </div>
+  </div>
+
+  <div id="collision-transition-panel" class="collision-panel">
+    <div id="sc-block" class="sc-left">SC</div>
+    <div id="rp-block" class="rp-right">RP</div>
+    <div id="blast-ring" class="collision-ring"></div>
+  </div>
+
   <div id="main-landing" class="w-full flex flex-col items-center justify-center min-h-[100dvh]">
     <div class="fixed inset-0 -z-10">
       <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50"></div>
     </div>
 
-    <!-- Menu Trigger Button -->
     <div class="fixed top-0 left-0 p-4 z-50">
       <button id="menu-btn" class="text-white hover:text-yellow-400 focus:outline-none transition-colors duration-300 p-2">
         <i class="fas fa-bars text-2xl"></i>
       </button>
     </div>
 
-    <!-- Navigation Sidebar Layout Frame -->
     <div id="sidebar" class="fixed top-0 left-0 h-full w-72 bg-black/95 border-r border-yellow-500/20 backdrop-blur-xl z-50 transform -translate-x-full transition-transform duration-300 ease-in-out shadow-2xl flex flex-col p-6">
       <div class="flex justify-end mb-8">
         <button id="close-btn" class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">
@@ -125,7 +377,6 @@
           <span>ADMIN PANEL</span>
         </button>
 
-        <!-- NEW SYSTEM COMPONENT ELEMENT: Server Dashboard Button Below Admin Panel -->
         <button id="server-dashboard-btn" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl bg-gradient-to-r from-yellow-500/10 to-transparent border border-yellow-500/30 text-left text-yellow-400 hover:text-black hover:bg-yellow-400 transition-all duration-300 font-bold group shadow-lg">
           <span class="w-2 h-2 rounded-full bg-yellow-400 group-hover:bg-black animate-pulse"></span>
           <i class="fas fa-server text-lg"></i>
@@ -148,12 +399,12 @@
           <span class="text-yellow-400">Y</span>
         </div>
         <div class="text-sm md:text-md tracking-[0.5em] text-gray-400 font-light mt-2 uppercase pl-[0.5em]">
-          R O L E P L A Y
+          ROLEPLAY
         </div>
       </div>
     </header>
 
-    <div class="text-center mb-10">
+    <div class="text-center mb-10 px-4">
       <h1 class="text-4xl md:text-5xl font-extrabold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
         Welcome to <span class="text-yellow-400 glow">SemiX City</span>
       </h1>
@@ -177,7 +428,6 @@
       </a>
     </div>
 
-    <!-- 3 Card Grid System Layout Frame -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl w-full px-4 mb-20 z-10">
       <div class="card-hover bg-white/5 backdrop-blur-sm p-6 rounded-2xl shadow-2xl text-center border border-white/10 hover:border-yellow-500/30">
         <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-gradient-to-br from-yellow-500 to-amber-600 flex items-center justify-center text-xl text-black shadow-lg">
@@ -204,7 +454,7 @@
       </div>
     </div>
 
-    <div class="mt-8 text-center">
+    <div class="mt-8 text-center px-4">
       <p class="text-sm text-gray-400 mb-4">
         Ready to start your adventure? Click anywhere to join our 
         <a href="https://discord.gg/FeacZEXbQt" target="_blank" class="text-yellow-400 hover:text-white font-medium transition-colors duration-300">
@@ -215,7 +465,6 @@
     </div>
   </div>
 
-  <!-- AUTH MODAL FOR STAFF SYSTEM CONTROLLER PANEL -->
   <div id="auth-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-[100] p-4">
     <div class="bg-[#0f1107] border-2 border-yellow-500/30 w-full max-w-md rounded-2xl p-6 shadow-2xl transform transition-all scale-95 duration-300">
       <div class="flex items-center gap-3 border-b border-yellow-500/10 pb-4 mb-4">
@@ -244,7 +493,6 @@
     </div>
   </div>
 
-  <!-- NEW SEPARATE NEW INTERFACE: SERVER DASHBOARD PANEL VIEW FRAME (REAL MEMBER DATA ENGINE) -->
   <div id="live-server-dashboard" class="hidden w-full max-w-5xl mx-auto p-4 md:p-8 animate__animated animate__fadeIn">
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-yellow-500/20 pb-6 mb-8 gap-4">
       <div>
@@ -254,14 +502,13 @@
           </span>
           <h1 class="logo-font text-2xl md:text-3xl font-black text-yellow-400 tracking-wider">SEMIX METRICS HUB</h1>
         </div>
-        <p class="text-xs text-gray-400 uppercase tracking-widest mt-1">Real-Time Discord Integration & SAMP Paradigm</p>
+        <p class="text-xs text-gray-400 uppercase tracking-widest mt-1">Real-Time Discord Integration &amp; SAMP  </p>
       </div>
       <button id="close-dashboard-btn" class="bg-yellow-400 hover:bg-yellow-500 text-black px-5 py-2.5 rounded-xl font-bold transition-all duration-300 flex items-center gap-2 text-sm shadow-lg">
         <i class="fas fa-arrow-left"></i> Return Home
       </button>
     </div>
 
-    <!-- Live Verified Statistics Tracking Cards Grid Layout Component Frame -->
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
       <div class="bg-gradient-to-br from-indigo-950/40 to-black/60 border border-indigo-500/20 rounded-2xl p-6 shadow-2xl relative overflow-hidden group">
         <div class="absolute right-4 top-4 text-indigo-500/10 text-5xl font-black group-hover:scale-110 transition-transform"><i class="fab fa-discord"></i></div>
@@ -291,11 +538,10 @@
       </div>
     </div>
 
-    <!-- SAMP Structural Strategic Thought Array Component Carousel Template Structure Box -->
     <div class="bg-white/5 border border-white/10 rounded-3xl p-6 md:p-8 backdrop-blur-md mb-8 relative shadow-2xl">
       <div class="flex items-center gap-2 text-yellow-400 font-bold uppercase tracking-wider text-xs mb-4">
         <i class="fas fa-quote-left text-sm"></i>
-        <span>SemiX City SAMP Axiom Paradigm</span>
+        <span>SemiX City SAMP Axiom </span>
       </div>
       
       <div class="min-h-[100px] flex flex-col justify-center">
@@ -310,7 +556,6 @@
     </div>
   </div>
 
-  <!-- AUTH STAFF CONTROLLER DASHBOARD INTERFACE (MUNPULLATHU THADASSAMILLATHA REETHIYIL INTACT AAKKIYATH) -->
   <div id="admin-dashboard" class="hidden w-full max-w-6xl mx-auto p-4 md:p-8">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-yellow-500/20 pb-6 mb-8 gap-4">
       <div>
@@ -320,14 +565,13 @@
           </span>
           <h1 class="logo-font text-2xl md:text-3xl font-black text-yellow-400 tracking-wider">SEMIX STAFF CONTROLLER</h1>
         </div>
-        <p class="text-xs text-gray-400 uppercase tracking-widest mt-1">Live Server Metrics & Real Activity Logging</p>
+        <p class="text-xs text-gray-400 uppercase tracking-widest mt-1">Live Server Metrics &amp; Real Activity Logging</p>
       </div>
       <button id="logout-btn" class="bg-red-500/10 hover:bg-red-500 border border-red-500/30 text-red-400 hover:text-white px-5 py-2.5 rounded-xl font-bold transition-all duration-300 flex items-center gap-2 text-sm">
         <i class="fas fa-sign-out-alt"></i> Disconnect Session
       </button>
     </div>
 
-    <!-- Analytics Cards Locked strictly to 0 -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
       <div class="bg-black/40 border border-white/5 rounded-2xl p-5 backdrop-blur-md">
         <div class="text-gray-400 text-xs font-bold tracking-wider uppercase mb-2">Total Connections</div>
@@ -353,7 +597,6 @@
       </div>
     </div>
 
-    <!-- Connection Table System Frame -->
     <div class="bg-black/40 border border-white/10 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-md mb-8">
       <div class="border-b border-white/5 px-6 py-4 flex justify-between items-center bg-white/5">
         <div class="flex items-center gap-2">
@@ -385,7 +628,6 @@
       </div>
     </div>
 
-    <!-- Advanced User Behavior System Actions Box -->
     <div class="bg-[#0b0c05] border border-yellow-500/20 rounded-2xl shadow-xl overflow-hidden p-5 font-mono text-xs">
       <div class="flex items-center justify-between border-b border-white/5 pb-3 mb-4 text-gray-400 uppercase font-bold tracking-wider">
         <div class="flex items-center gap-2 text-yellow-400">
@@ -400,7 +642,67 @@
     </div>
   </div>
 
+  <!-- Corner Web Activity Tracker -->
+  <div id="corner-activity-tracker" class="fixed bottom-3 right-3 z-[99] bg-black/80 border border-yellow-500/20 backdrop-blur-md px-3 py-1.5 rounded-lg flex items-center gap-2 font-mono text-[10px] text-gray-400 select-none pointer-events-none shadow-lg">
+    <span class="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse"></span>
+    <span>IDENTITY: <span id="corner-user-id" class="text-white font-bold">...</span></span>
+    <span class="text-gray-600">|</span>
+    <span>LAST ACTION: <span id="corner-last-action" class="text-yellow-500/90 italic">Awaiting Interaction</span></span>
+  </div>
+
   <script>
+    // TWO-STAGE ENGINE PIPELINE + COLLISION FEATURE
+    document.addEventListener('DOMContentLoaded', () => {
+      const introCutscene = document.getElementById('intro-cutscene');
+      const introShockwave = document.getElementById('intro-shockwave');
+      const introSubtitle = document.getElementById('intro-subtitle');
+      const collisionPanel = document.getElementById('collision-transition-panel');
+      const scBlock = document.getElementById('sc-block');
+      const rpBlock = document.getElementById('rp-block');
+      const blastRing = document.getElementById('blast-ring');
+      const mainLanding = document.getElementById('main-landing');
+
+      if (mainLanding) {
+        mainLanding.style.opacity = "0";
+        mainLanding.style.transform = "scale(0.96) translateY(12px)";
+        mainLanding.style.transition = "opacity 1.4s cubic-bezier(0.23, 1, 0.32, 1), transform 1.4s cubic-bezier(0.23, 1, 0.32, 1)";
+      }
+
+      // Trigger subtitle reveal and shockwave synchronously with the 3D text slam
+      setTimeout(() => {
+        if (introSubtitle) introSubtitle.style.opacity = "1";
+        if (introShockwave) introShockwave.classList.add('shockwave-blast');
+      }, 4350);
+
+      // Cleanly transition out Stage 1 cutscene and deploy the SC & RP Ring Collision Portal
+      setTimeout(() => {
+        if (introCutscene) {
+          introCutscene.classList.add('cutscene-fade-out');
+          setTimeout(() => { introCutscene.remove(); }, 1000);
+        }
+        if (collisionPanel) {
+          collisionPanel.style.opacity = "1";
+          scBlock.classList.add('sc-scroll-in');
+          rpBlock.classList.add('rp-scroll-in');
+        }
+      }, 5500);
+
+      // Fire horizontal kinetic text collision energy blast ring
+      setTimeout(() => { if (blastRing) blastRing.classList.add('ring-blast-active'); }, 6500); 
+
+      // Remove transition panels and reveal functional interface
+      setTimeout(() => {
+        if (collisionPanel) {
+          collisionPanel.style.opacity = "0";
+          setTimeout(() => { collisionPanel.remove(); }, 300);
+        }
+        if (mainLanding) {
+          mainLanding.style.opacity = "1";
+          mainLanding.style.transform = "scale(1) translateY(0px)";
+        }
+      }, 7000); 
+    });
+
     let currentUserId = localStorage.getItem('semix_user_id');
     if (!currentUserId) {
       currentUserId = 'user' + Math.floor(10000 + Math.random() * 90000);
@@ -431,10 +733,29 @@
     const authCancelBtn = document.getElementById('auth-cancel-btn');
     const authError = document.getElementById('auth-error');
 
-    // SAMP Concept Database Array Architecture Engine Layer
+    // Global variable to keep an active, unlocked shared audio track open
+    let sharedAudioContext = null;
+
+    // Standard helper function to unlock audio layers during safe user gestures
+    function initializeAudioEngine() {
+      if (!sharedAudioContext) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) {
+          sharedAudioContext = new AudioContext();
+        }
+      }
+      if (sharedAudioContext && sharedAudioContext.state === 'suspended') {
+        sharedAudioContext.resume();
+      }
+    }
+
+    // Capture initial interactions on webpage to force browser audio permission unlock
+    window.addEventListener('click', initializeAudioEngine, { once: false });
+    window.addEventListener('keydown', initializeAudioEngine, { once: false });
+
     const sampThoughts = [
       { quote: "Roleplay is not about winning a scenario; it's about telling a coherent story where every character's choices have structural weight.", author: "SAMP Roleplay Protocol" },
-      { quote: "A great citizen respects the boundary lines of communication. Smooth dialogue beats heavy gunplay any day of the week.", author: "Community Paradigm" },
+      { quote: "A great citizen respects the boundary lines of communication. Smooth dialogue beats heavy gunplay any day of the week.", author: "Community " },
       { quote: "In SemiX City, mature interaction means treating every encounter as an organic canvas development opportunity.", author: "Axiom Guidelines" },
       { quote: "The true legacy of old-school SAMP is the discipline of maintaining character integrity while adapting smoothly to environment updates.", author: "Legacy Operator" }
     ];
@@ -462,24 +783,19 @@
       renderSAMPThought();
     });
 
-    // FETCH REAL DATA ENGINE VIA LIVE DISCORD SERVER API WIDGET ROUTE LAYER
     async function fetchRealDiscordCounts() {
       const totalCountEl = document.getElementById('discord-total-count');
       const onlineCountEl = document.getElementById('discord-online-count');
       
       try {
-        // Direct request mapping utilizing your actual public server widget identifier path
         const response = await fetch('https://discord.com/api/guilds/1117506994132471850/widget.json');
         if (!response.ok) throw new Error('API Frame response bad');
         const data = await response.json();
-        
-        // Discord API lists dynamic online presence array. Total approximation mapped organically.
         const onlineCount = data.presence_count || 0;
         
         onlineCountEl.innerText = onlineCount;
         totalCountEl.innerText = "43"; 
       } catch (error) {
-        // Safe robust fallbacks referencing genuine active session logs parameters
         totalCountEl.innerText = "43";
         onlineCountEl.innerText = "0";
       }
@@ -506,6 +822,9 @@
       const advancedConsole = document.getElementById('advanced-behavior-logs');
       let localLogs = JSON.parse(localStorage.getItem('semix_real_logs')) || [];
       
+      if(document.getElementById('corner-user-id')) document.getElementById('corner-user-id').innerText = currentUserId;
+      if(localLogs.length > 0 && document.getElementById('corner-last-action')) document.getElementById('corner-last-action').innerText = localLogs[0].action;
+
       if(localLogs.length > 0 && tableBody) {
         const emptyRow = document.getElementById('empty-log-row');
         if(emptyRow) emptyRow.remove();
@@ -532,7 +851,6 @@
         }
       }
       
-      // Fixed at 0 permanently as requested
       const tc = document.getElementById('total-connections-counter');
       const ac = document.getElementById('active-players-counter');
       const qc = document.getElementById('queue-counter');
@@ -544,7 +862,6 @@
       if(lc) lc.innerText = "0.0%";
     }
 
-    // INTERFACE NAVIGATION SYSTEM HANDLERS
     serverDashboardBtn.addEventListener('click', () => {
       sidebar.classList.add('-translate-x-full');
       mainLanding.classList.add('hidden');
@@ -588,14 +905,95 @@
       recordRealLog("Selected active core Discord connect button component link", "Authorized");
     });
 
+    // CINEMATIC INTERCEPT CUTSCENE ENGINE TRIGGER
+    function triggerAdminCutscene() {
+      // Force resume running audio system state upon button context validation
+      initializeAudioEngine();
+
+      const portal = document.getElementById('admin-cutscene-portal');
+      
+      portal.innerHTML = `
+        <div id="admin-movie-layer" class="admin-cutscene-overlay">
+          <div class="admin-shock-ring" id="movie-ring"></div>
+          <div class="text-center p-4">
+            <div class="scrp-font text-7xl md:text-8xl uppercase flex items-center justify-center text-white filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] animate__animated animate__zoomIn animate__faster mb-6">
+              S<span class="text-white">C</span><span class="text-white">R</span><span class="text-[#eab308]">P</span>
+            </div>
+            <div id="typewriter-terminal" class="font-mono text-sm md:text-base text-gray-300 font-bold uppercase tracking-[0.15em] min-h-[24px]"></div>
+          </div>
+        </div>
+      `;
+
+      const layer = document.getElementById('admin-movie-layer');
+      const textTarget = document.getElementById('typewriter-terminal');
+      const ring = document.getElementById('movie-ring');
+      
+      const message = "YOU CAN SEE THE ENTIRE SCRP VICTIMS";
+      let charIndex = 0;
+
+      // Synthesize Mechanical PC Keyboard Key Click Sounds
+      function playTypewriterSound() {
+        try {
+          // Fallback check to ensure audio track reference is up and active
+          const ctx = sharedAudioContext || new (window.AudioContext || window.webkitAudioContext)();
+          if (!ctx) return;
+          if (ctx.state === 'suspended') ctx.resume();
+          
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          
+          // Mimic the organic acoustic frequencies of a physical mechanical switch click
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(140 + Math.random() * 40, ctx.currentTime); 
+          osc.frequency.exponentialRampToValueAtTime(800 + Math.random() * 200, ctx.currentTime + 0.01);
+          
+          // Fast attack and natural micro-decay envelope simulation
+          gain.gain.setValueAtTime(0.08, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.03);
+          
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          
+          osc.start();
+          osc.stop(ctx.currentTime + 0.03);
+        } catch (e) {
+          // Bypasses browser audio locks quietly if restricted
+        }
+      }
+
+      const typewriterInterval = setInterval(() => {
+        // If the current character is not a blank space block, play the click feedback noise
+        if (message[charIndex] !== " ") {
+          playTypewriterSound();
+        }
+
+        textTarget.textContent += message[charIndex];
+        charIndex++;
+        if(charIndex >= message.length) {
+          clearInterval(typewriterInterval);
+          
+          setTimeout(() => { if(ring) ring.classList.add('admin-shock-active'); }, 250);
+
+          setTimeout(() => {
+            if(layer) {
+              layer.style.opacity = "0";
+              setTimeout(() => {
+                portal.innerHTML = '';
+                mainLanding.classList.add('hidden');
+                adminDashboard.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }, 500);
+            }
+          }, 1400);
+        }
+      }, 40); 
+    }
+
     function processVerification() {
       if (authCodeField.value === "scrpro") {
         authModal.classList.add('hidden');
-        mainLanding.classList.add('hidden');
-        liveServerDashboard.classList.add('hidden');
-        adminDashboard.classList.remove('hidden');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        recordRealLog("Passed token credentials security protocols and viewed staff console panel", "Authorized");
+        recordRealLog("Passed token credentials security protocols and triggered cinematic intercept portal", "Authorized");
+        triggerAdminCutscene();
       } else {
         authError.classList.remove('hidden');
         recordRealLog(`Attempted server administrative verification checks using bad pass: "${authCodeField.value}"`, "Denied");
@@ -615,21 +1013,14 @@
     document.body.addEventListener("click", (e) => {
       if (!authModal.classList.contains('hidden') || mainLanding.classList.contains('hidden') || !liveServerDashboard.classList.contains('hidden')) return;
       if (e.target.tagName === 'A' || e.target.closest('a') || e.target.tagName === 'BUTTON' || e.target.closest('button') || e.target.closest('#sidebar')) return;
+      if (document.getElementById('intro-cutscene') || document.getElementById('collision-transition-panel') || document.getElementById('admin-movie-layer')) return;
       
-      recordRealLog("Interacted with canvas template outer viewport parameters", "Authorized");
+      recordRealLog("Interacted with canvas template outer viewport meters", "Authorized");
 
       const ripple = document.createElement('div');
-      ripple.style.position = 'fixed';
-      ripple.style.width = '20px';
-      ripple.style.height = '20px';
-      ripple.style.borderRadius = '50%';
-      ripple.style.background = 'rgba(234, 179, 8, 0.4)';
-      ripple.style.pointerEvents = 'none';
-      ripple.style.transform = 'translate(-50%, -50%)';
-      ripple.style.animation = 'ripple 0.6s linear';
-      ripple.style.zIndex = '9999';
-      ripple.style.left = `${e.clientX}px`;
-      ripple.style.top = `${e.clientY}px`;
+      ripple.style.position = 'fixed'; ripple.style.width = '20px'; ripple.style.height = '20px'; ripple.style.borderRadius = '50%';
+      ripple.style.background = 'rgba(234, 179, 8, 0.4)'; ripple.style.pointerEvents = 'none'; ripple.style.transform = 'translate(-50%, -50%)';
+      ripple.style.animation = 'ripple 0.6s linear'; ripple.style.zIndex = '9999'; ripple.style.left = `${e.clientX}px`; ripple.style.top = `${e.clientY}px`;
       
       document.body.appendChild(ripple);
       setTimeout(() => { window.open("https://discord.gg/FeacZEXbQt", "_blank"); }, 300);
